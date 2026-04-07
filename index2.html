@@ -97,6 +97,8 @@
 
     /* ============================================
        NAV BAR
+       Logo: vertically centered at the nav bottom edge —
+       50% inside nav, 50% below (drops into hero).
     ============================================ */
     .nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -118,13 +120,16 @@
       display: flex; align-items: center; justify-content: space-between;
       max-width: 1180px; margin: 0 auto; padding: 0 24px;
       height: var(--nav-h);
+      /* overflow visible so logo can drop below */
       overflow: visible;
     }
 
+    /* ---- Logo: sits so its vertical centre aligns with bottom of nav ---- */
     .nav-logo-wrap {
       display: flex; align-items: center;
       position: relative;
       flex-shrink: 0;
+      /* push the whole anchor down so circle centre = nav bottom */
       margin-top: calc(var(--logo-d) / 2);
       z-index: 101;
     }
@@ -143,6 +148,7 @@
       object-fit: contain;
     }
 
+    /* Nav links */
     .nav-links {
       display: flex; align-items: center; gap: 36px;
       list-style: none;
@@ -170,6 +176,7 @@
     .nav-links a:hover { color: var(--primary-indigo); }
     .nav-links a:hover::after { transform: scaleX(1); }
 
+    /* CTA button */
     .nav-cta {
       background: linear-gradient(135deg, var(--primary-indigo) 0%, var(--primary-magenta) 100%);
       color: var(--white);
@@ -199,6 +206,7 @@
        HERO SECTION
     ============================================ */
     .hero {
+      /* Extra top padding = nav height + half logo height so content clears logo */
       padding-top: calc(var(--nav-h) + var(--logo-d) / 2 + 32px);
       min-height: 100vh;
       background: linear-gradient(160deg, #FAF9FD 0%, #F3EEF9 40%, #FCF0F5 70%, #FAF9FD 100%);
@@ -257,6 +265,7 @@
       max-width: 560px;
     }
 
+    /* ---- Featured Speakers Strip in Hero ---- */
     .hero-speakers-strip {
       display: flex;
       align-items: center;
@@ -310,6 +319,7 @@
       background: rgba(61,45,142,0.12);
     }
 
+    /* webinar meta info */
     .hero-meta {
       display: flex;
       flex-direction: column;
@@ -330,6 +340,7 @@
       flex-shrink: 0;
     }
 
+    /* countdown */
     .countdown-wrap { margin-bottom: 0; }
     .countdown-label {
       font-size: 12px; font-weight: 600; text-transform: uppercase;
@@ -381,9 +392,9 @@
     }
     .form-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(200,51,122,0.4); }
     .form-submit:active { transform: translateY(0); }
-    .form-submit:disabled { opacity: 0.8; cursor: not-allowed; transform: none; }
     .form-note { text-align: center; font-size: 11px; color: var(--text-light); margin-top: 14px; display: flex; align-items: center; justify-content: center; gap: 6px; }
 
+    /* credibility strip */
     .credibility { margin-top: 40px; padding-top: 40px; border-top: 1px solid rgba(61,45,142,0.08); }
     .credibility-label { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-light); text-align: center; margin-bottom: 20px; }
     .uni-logos { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
@@ -391,7 +402,7 @@
     .credibility-note { font-size: 12px; color: var(--text-light); text-align: center; margin-top: 16px; font-style: italic; }
 
     /* ============================================
-       FEATURED SPEAKERS SPOTLIGHT
+       FEATURED SPEAKERS SPOTLIGHT — below hero
     ============================================ */
     .speakers-spotlight {
       background: white;
@@ -462,7 +473,9 @@
     .spotlight-role { font-size: 12px; font-weight: 600; color: var(--primary-magenta); margin-bottom: 12px; line-height: 1.4; }
     .spotlight-bio { font-size: 13px; color: var(--text-mid); line-height: 1.7; }
 
-    .spotlight-cta-wrap { text-align: center; }
+    .spotlight-cta-wrap {
+      text-align: center;
+    }
     .spotlight-cta {
       display: inline-flex; align-items: center; gap: 10px;
       background: linear-gradient(135deg, var(--primary-indigo), var(--primary-magenta));
@@ -589,7 +602,7 @@
     .service-card p { font-size: 13px; color: var(--text-mid); line-height: 1.65; }
 
     /* ============================================
-       UPCOMING SPEAKERS SECTION
+       UPCOMING SPEAKERS SECTION (expanded)
     ============================================ */
     .speakers { background: var(--off-white); }
     .speakers-grid {
@@ -599,6 +612,7 @@
       max-width: 1040px;
       margin: 0 auto;
     }
+    /* Full-width card for lone speaker in odd total */
     .speakers-grid .speaker-card:last-child:nth-child(odd) {
       grid-column: 1 / -1;
       max-width: 460px;
@@ -675,6 +689,17 @@
     .testi-author { display: flex; align-items: center; gap: 12px; }
     .testi-badge { background: linear-gradient(135deg, var(--primary-indigo), var(--primary-magenta)); color: white; font-size: 11px; font-weight: 700; padding: 6px 14px; border-radius: var(--radius-xl); }
 
+    /* stats bar */
+    .stats-bar {
+      background: linear-gradient(135deg, var(--primary-indigo) 0%, var(--primary-magenta) 60%, var(--primary-pink) 100%);
+      padding: 48px 0;
+    }
+    .stats-inner { display: flex; justify-content: center; gap: 0; flex-wrap: wrap; }
+    .stat-item { text-align: center; padding: 16px 56px; position: relative; flex: 1; min-width: 200px; }
+    .stat-item:not(:last-child)::after { content: ''; position: absolute; right: 0; top: 20%; bottom: 20%; width: 1px; background: rgba(255,255,255,0.25); }
+    .stat-num { display: block; font-size: 40px; font-weight: 800; color: white; line-height: 1; margin-bottom: 8px; }
+    .stat-label { display: block; font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.85); }
+
     /* ============================================
        UNIVERSITY LOGO SCROLLER
     ============================================ */
@@ -696,7 +721,9 @@
       margin-bottom: 44px;
       position: relative; z-index: 1;
     }
-    .logo-scroller-header .section-label { color: var(--sec-lavender); }
+    .logo-scroller-header .section-label {
+      color: var(--sec-lavender);
+    }
     .logo-scroller-header h2 {
       font-size: clamp(22px, 3vw, 34px);
       font-weight: 700;
@@ -710,7 +737,11 @@
       background-clip: text;
     }
 
-    .scroller-track-wrap { position: relative; }
+    /* Track & animation */
+    .scroller-track-wrap {
+      position: relative;
+      /* fade edges */
+    }
     .scroller-track-wrap::before,
     .scroller-track-wrap::after {
       content: '';
@@ -848,36 +879,36 @@
     }
 
     .cred-outer {
-      position: relative;
-      contain: strict;
-      height: 40px;
-      overflow: hidden;
-    }
-    .cred-fade-l,
-    .cred-fade-r {
-      position: absolute;
-      top: 0; bottom: 0;
-      width: 28px;
-      z-index: 2;
-      pointer-events: none;
-    }
-    .cred-fade-l { left: 0;  background: linear-gradient(90deg,  var(--white), transparent); }
-    .cred-fade-r { right: 0; background: linear-gradient(270deg, var(--white), transparent); }
-    .cred-track {
-      display: flex;
-      gap: 10px;
-      position: absolute;
-      left: 0; top: 50%;
-      transform: translateY(-50%);
-      animation: scroll-cred 22s linear infinite;
-      will-change: transform;
-    }
-    .cred-track:hover { animation-play-state: paused; }
+  position: relative;
+  contain: strict;
+  height: 40px;
+  overflow: hidden;
+}
+.cred-fade-l,
+.cred-fade-r {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 28px;
+  z-index: 2;
+  pointer-events: none;
+}
+.cred-fade-l { left: 0;  background: linear-gradient(90deg,  var(--white), transparent); }
+.cred-fade-r { right: 0; background: linear-gradient(270deg, var(--white), transparent); }
+.cred-track {
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translateY(-50%);
+  animation: scroll-cred 22s linear infinite;
+  will-change: transform;
+}
+.cred-track:hover { animation-play-state: paused; }
 
-    @keyframes scroll-cred {
-      0%   { transform: translateY(-50%) translateX(0); }
-      100% { transform: translateY(-50%) translateX(-50%); }
-    }
+@keyframes scroll-cred {
+  0%   { transform: translateY(-50%) translateX(0); }
+  100% { transform: translateY(-50%) translateX(-50%); }
+}
   </style>
 </head>
 <body>
@@ -885,6 +916,7 @@
   <!-- NAV -->
   <nav class="nav">
     <div class="nav-inner">
+      <!-- Logo: vertically centred at nav bottom edge — 50% in, 50% hanging below -->
       <a href="#hero" class="nav-logo-wrap">
         <div class="nav-logo-circle">
           <img src="https://www.embarcadmissions.com/assets/logo.png" alt="Embarc Admissions" />
@@ -917,29 +949,39 @@
           <h1>What Does It Actually Take to Get Into an <span class="gradient-text">Ivy League College?</span></h1>
           <p class="hero-sub">Hear It Directly From Former Admissions Directors at Cornell, Harvard, Stanford &amp; Columbia</p>
 
-          <div class="hero-badge" style="margin-bottom:14px;">
-            Featuring
-          </div>
+          <!-- Featured Speakers Strip -->
+        <div class="hero-badge" style="margin-bottom:14px;">
+        <!-- <svg width="13" height="13" fill="none" viewBox="0 0 24 24"><path d="M12 2l2.5 5.1 5.5.8-4 3.9.9 5.5L12 14.8l-4.9 2.5.9-5.5L4 7.9l5.5-.8z" fill="#3D2D8E"/></svg> -->
+        Featuring
+        </div>
 
-          <div class="hero-speakers-strip">
-            <div class="hero-speaker-pill">
-              <img src="https://www.embarcadmissions.com/assets/images/team/admissionCounsellor/DrArthurSmith.png" alt="Dr. Arthur Smith" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
-              <div class="pill-initials" style="display:none">AS</div>
-              <div class="hero-speaker-pill-info">
-                <strong>Dr. Arthur Smith</strong>
-                <span>Former Dean · Duke &amp; Cornell</span>
-              </div>
+        <div class="hero-speakers-strip">
+        <div class="hero-speaker-pill">
+            <img
+            src="https://www.embarcadmissions.com/assets/images/team/admissionCounsellor/DrArthurSmith.png"
+            alt="Dr. Arthur Smith"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+            />
+            <div class="pill-initials" style="display:none">AS</div>
+            <div class="hero-speaker-pill-info">
+            <strong>Dr. Arthur Smith</strong>
+            <span>Former Dean · Duke &amp; Cornell</span>
             </div>
-            <div class="hero-speaker-divider"></div>
-            <div class="hero-speaker-pill">
-              <img src="https://www.embarcadmissions.com/assets/images/team/dipika.png" alt="Dipika Chopra" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
-              <div class="pill-initials" style="display:none">DC</div>
-              <div class="hero-speaker-pill-info">
-                <strong>Dipika Chopra</strong>
-                <span>Co-founder · Columbia Alum</span>
-              </div>
+        </div>
+        <div class="hero-speaker-divider"></div>
+        <div class="hero-speaker-pill">
+            <img
+            src="https://www.embarcadmissions.com/assets/images/team/dipika.png"
+            alt="Dipika Chopra"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+            />
+            <div class="pill-initials" style="display:none">DC</div>
+            <div class="hero-speaker-pill-info">
+            <strong>Dipika Chopra</strong>
+            <span>Co-founder · Columbia Alum</span>
             </div>
-          </div>
+        </div>
+        </div>
 
           <div class="hero-meta">
             <div class="hero-meta-item">
@@ -1007,38 +1049,41 @@
               No spam. Your information is safe with us.
             </p>
 
-            <div class="credibility">
-              <div class="credibility-label">Featuring insights from admissions leaders at</div>
+<div class="credibility">
+  <div class="credibility-label">Featuring insights from admissions leaders at</div>
 
-              <div class="cred-outer">
-                <div class="cred-fade-l"></div>
-                <div class="cred-fade-r"></div>
-                <div class="cred-track">
-                  <span class="uni-pill">Cornell</span>
-                  <span class="uni-pill">Harvard</span>
-                  <span class="uni-pill">Stanford</span>
-                  <span class="uni-pill">Brown</span>
-                  <span class="uni-pill">Columbia</span>
-                  <span class="uni-pill">Duke</span>
-                  <span class="uni-pill">Oxford</span>
-                  <span class="uni-pill">Cambridge</span>
-                  <span class="uni-pill">Yale</span>
-                  <span class="uni-pill">UPenn</span>
-                  <span class="uni-pill">Cornell</span>
-                  <span class="uni-pill">Harvard</span>
-                  <span class="uni-pill">Stanford</span>
-                  <span class="uni-pill">Brown</span>
-                  <span class="uni-pill">Columbia</span>
-                  <span class="uni-pill">Duke</span>
-                  <span class="uni-pill">Oxford</span>
-                  <span class="uni-pill">Cambridge</span>
-                  <span class="uni-pill">Yale</span>
-                  <span class="uni-pill">UPenn</span>
-                </div>
-              </div>
+  <div class="cred-outer">
+    <div class="cred-fade-l"></div>
+    <div class="cred-fade-r"></div>
+    <div class="cred-track">
+      <span class="uni-pill">Cornell</span>
+      <span class="uni-pill">Harvard</span>
+      <span class="uni-pill">Stanford</span>
+      <span class="uni-pill">Brown</span>
+      <span class="uni-pill">Columbia</span>
+      <span class="uni-pill">Duke</span>
+      <span class="uni-pill">Oxford</span>
+      <span class="uni-pill">Cambridge</span>
+      <span class="uni-pill">Yale</span>
+      <span class="uni-pill">UPenn</span>
+      <span class="uni-pill">Cornell</span>
+      <span class="uni-pill">Harvard</span>
+      <span class="uni-pill">Stanford</span>
+      <span class="uni-pill">Brown</span>
+      <span class="uni-pill">Columbia</span>
+      <span class="uni-pill">Duke</span>
+      <span class="uni-pill">Oxford</span>
+      <span class="uni-pill">Cambridge</span>
+      <span class="uni-pill">Yale</span>
+      <span class="uni-pill">UPenn</span>
+    </div>
+  </div>
 
-              <p class="credibility-note">Learn from the people who reviewed over 20,000 applications and made the final decisions.</p>
-            </div>
+  <p class="credibility-note">Learn from the people who reviewed over 20,000 applications and made the final decisions.</p>
+</div>          
+
+
+
           </div>
         </div>
 
@@ -1152,62 +1197,6 @@
           </div>
           <h3>Schedule a Session With Our Founder</h3>
           <p>Schedule a free 20 min, one-on-one session with our founder, for guidance to build a personalized action plan.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-    <!-- ======== AGENDA ======== -->
-  <section class="section agenda" id="agenda">
-    <div class="container">
-      <div style="text-align:center">
-        <span class="section-label">Webinar Agenda</span>
-        <h2 class="section-headline" style="text-align:center">What We'll Cover</h2>
-      </div>
-      <p class="section-sub" style="margin-bottom:52px">A structured 60-minute session packed with expert insights, strategic frameworks, and live Q&amp;A.</p>
-
-      <div class="agenda-list">
-        <div class="agenda-item fade-up">
-          <div class="agenda-line">
-            <div class="agenda-dot">
-              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="white" stroke-width="2" fill="none"/><circle cx="12" cy="9" r="2.5" fill="white"/></svg>
-            </div>
-          </div>
-          <div class="agenda-body">
-            <span class="agenda-duration">30 Minutes</span>
-            <div class="agenda-speaker-name">Dr. Arthur Smith</div>
-            <div class="agenda-speaker-title">Former Dean of Admissions — Duke University &amp; Cornell University</div>
-            <div class="agenda-talk-title">When Does the College Admissions Journey Really Begin?</div>
-            <p class="agenda-talk-desc">Drawing on over 25 years of experience, Dr. Smith will unpack how admissions decisions are truly made and what parents should focus on across the four years of high school to build a meaningful advantage. What most families miss — and what actually makes the difference.</p>
-          </div>
-        </div>
-        <div class="agenda-item fade-up">
-          <div class="agenda-line">
-            <div class="agenda-dot">
-              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="white" stroke-width="2"/><path d="M12 7v5l3 3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
-            </div>
-          </div>
-          <div class="agenda-body">
-            <span class="agenda-duration">20 Minutes</span>
-            <div class="agenda-speaker-name">Dipika Chopra</div>
-            <div class="agenda-speaker-title">Co-founder, Embarc Admissions &amp; Alumni, Columbia University</div>
-            <div class="agenda-talk-title">The New Reality of Study Abroad — What's Changing and How Families Should Adapt</div>
-            <p class="agenda-talk-desc">In a rapidly evolving global landscape, Dipika will share a strategic perspective on how families should approach study abroad today — balancing opportunity, outcomes, and long-term positioning for their child's future.</p>
-          </div>
-        </div>
-        <div class="agenda-item fade-up">
-          <div class="agenda-line">
-            <div class="agenda-dot">
-              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="white" stroke-width="2" stroke-linejoin="round"/></svg>
-            </div>
-          </div>
-          <div class="agenda-body">
-            <span class="agenda-duration">10 Minutes</span>
-            <div class="agenda-speaker-name">Live Q&amp;A with Dipika Chopra</div>
-            <div class="agenda-speaker-title">Interactive Closing Segment</div>
-            <div class="agenda-talk-title">Your Questions — Answered Live</div>
-            <p class="agenda-talk-desc">An interactive closing session to address key questions from parents and provide practical clarity on navigating the admissions journey. Bring your most pressing questions.</p>
-          </div>
         </div>
       </div>
     </div>
@@ -1456,6 +1445,61 @@
     </div>
   </section>
 
+  <!-- ======== AGENDA ======== -->
+  <section class="section agenda" id="agenda">
+    <div class="container">
+      <div style="text-align:center">
+        <span class="section-label">Webinar Agenda</span>
+        <h2 class="section-headline" style="text-align:center">What We'll Cover</h2>
+      </div>
+      <p class="section-sub" style="margin-bottom:52px">A structured 60-minute session packed with expert insights, strategic frameworks, and live Q&amp;A.</p>
+
+      <div class="agenda-list">
+        <div class="agenda-item fade-up">
+          <div class="agenda-line">
+            <div class="agenda-dot">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="white" stroke-width="2" fill="none"/><circle cx="12" cy="9" r="2.5" fill="white"/></svg>
+            </div>
+          </div>
+          <div class="agenda-body">
+            <span class="agenda-duration">30 Minutes</span>
+            <div class="agenda-speaker-name">Dr. Arthur Smith</div>
+            <div class="agenda-speaker-title">Former Dean of Admissions — Duke University &amp; Cornell University</div>
+            <div class="agenda-talk-title">When Does the College Admissions Journey Really Begin?</div>
+            <p class="agenda-talk-desc">Drawing on over 25 years of experience, Dr. Smith will unpack how admissions decisions are truly made and what parents should focus on across the four years of high school to build a meaningful advantage. What most families miss — and what actually makes the difference.</p>
+          </div>
+        </div>
+        <div class="agenda-item fade-up">
+          <div class="agenda-line">
+            <div class="agenda-dot">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="white" stroke-width="2"/><path d="M12 7v5l3 3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+          </div>
+          <div class="agenda-body">
+            <span class="agenda-duration">20 Minutes</span>
+            <div class="agenda-speaker-name">Dipika Chopra</div>
+            <div class="agenda-speaker-title">Co-founder, Embarc Admissions &amp; Alumni, Columbia University</div>
+            <div class="agenda-talk-title">The New Reality of Study Abroad — What's Changing and How Families Should Adapt</div>
+            <p class="agenda-talk-desc">In a rapidly evolving global landscape, Dipika will share a strategic perspective on how families should approach study abroad today — balancing opportunity, outcomes, and long-term positioning for their child's future.</p>
+          </div>
+        </div>
+        <div class="agenda-item fade-up">
+          <div class="agenda-line">
+            <div class="agenda-dot">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="white" stroke-width="2" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+          <div class="agenda-body">
+            <span class="agenda-duration">10 Minutes</span>
+            <div class="agenda-speaker-name">Live Q&amp;A with Dipika Chopra</div>
+            <div class="agenda-speaker-title">Interactive Closing Segment</div>
+            <div class="agenda-talk-title">Your Questions — Answered Live</div>
+            <p class="agenda-talk-desc">An interactive closing session to address key questions from parents and provide practical clarity on navigating the admissions journey. Bring your most pressing questions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ======== TESTIMONIALS ======== -->
   <section class="section testimonials" id="testimonials">
@@ -1490,6 +1534,26 @@
     </div>
   </section>
 
+  <!-- STATS BAR -->
+  <!-- <div class="stats-bar">
+    <div class="container">
+      <div class="stats-inner">
+        <div class="stat-item">
+          <span class="stat-num">500+</span>
+          <span class="stat-label">Students Admitted to Top 50 Universities</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">15+</span>
+          <span class="stat-label">Years of Ivy League &amp; Oxbridge Expertise</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">98%</span>
+          <span class="stat-label">Success Rate for Students We Work With</span>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
   <!-- ======== UNIVERSITY LOGO SCROLLER ======== -->
   <section class="logo-scroller-section">
     <div class="logo-scroller-header">
@@ -1499,6 +1563,8 @@
 
     <div class="scroller-track-wrap">
       <div class="scroller-track" id="logo-track">
+
+        <!-- Original set -->
         <div class="logo-card">
           <img src="/assets/Logo/harvard.png" alt="Harvard University" onerror="this.style.display='none'" />
           <span class="logo-card-name">Harvard University</span>
@@ -1554,6 +1620,7 @@
           <span class="logo-card-name">London School of Economics</span>
           <span class="logo-card-loc">London, England</span>
         </div>
+
         <!-- Duplicate set for seamless loop -->
         <div class="logo-card">
           <img src="/assets/Logo/harvard.png" alt="Harvard University" onerror="this.style.display='none'" />
@@ -1610,6 +1677,7 @@
           <span class="logo-card-name">London School of Economics</span>
           <span class="logo-card-loc">London, England</span>
         </div>
+
       </div>
     </div>
   </section>
@@ -1632,238 +1700,106 @@
     </div>
   </footer>
 
-  <!-- ============================================================
-       SCRIPTS — Single unified block, no duplicates
-  ============================================================ -->
   <script>
-  /* ============================================================
-     TOAST NOTIFICATION SYSTEM
-  ============================================================ */
-  const toastStyles = `
-    #toast-container {
-      position: fixed;
-      top: 24px;
-      right: 24px;
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      pointer-events: none;
-    }
-    .toast {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      background: white;
-      border-radius: 14px;
-      padding: 16px 20px;
-      min-width: 300px;
-      max-width: 380px;
-      box-shadow: 0 8px 40px rgba(22,0,63,0.18), 0 2px 8px rgba(22,0,63,0.08);
-      border-left: 4px solid #3D2D8E;
-      pointer-events: all;
-      opacity: 0;
-      transform: translateX(40px);
-      transition: opacity 0.35s ease, transform 0.35s ease;
-    }
-    .toast.toast--success { border-left-color: #22c55e; }
-    .toast.toast--error   { border-left-color: #ef4444; }
-    .toast.toast--info    { border-left-color: #3D2D8E; }
-    .toast.toast--show    { opacity: 1; transform: translateX(0); }
-    .toast-icon { width: 22px; height: 22px; flex-shrink: 0; margin-top: 1px; }
-    .toast-body { flex: 1; }
-    .toast-title {
-      font-family: 'Poppins', sans-serif;
-      font-size: 14px; font-weight: 700;
-      color: #16003F; margin-bottom: 3px;
-    }
-    .toast-msg {
-      font-family: 'Poppins', sans-serif;
-      font-size: 12px; color: #4A3F6B; line-height: 1.5;
-    }
-    .toast-close {
-      background: none; border: none; cursor: pointer;
-      color: #7B6FA0; font-size: 18px; line-height: 1;
-      padding: 0; flex-shrink: 0; margin-top: -2px;
-      transition: color 0.2s;
-    }
-    .toast-close:hover { color: #16003F; }
-    @media (max-width: 480px) {
-      #toast-container { top: 16px; right: 16px; left: 16px; }
-      .toast { min-width: unset; max-width: 100%; }
-    }
-  `;
-
-  (function initToasts() {
-    const style = document.createElement('style');
-    style.textContent = toastStyles;
-    document.head.appendChild(style);
-    const container = document.createElement('div');
-    container.id = 'toast-container';
-    document.body.appendChild(container);
-  })();
-
-  function showToast(type, title, message, duration) {
-    if (duration === undefined) duration = 5000;
-    const container = document.getElementById('toast-container');
-    const toast = document.createElement('div');
-    toast.className = 'toast toast--' + type;
-
-    const icons = {
-      success: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#22c55e"/><path d="M8 12l3 3 5-5" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-      error:   '<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#ef4444"/><path d="M8 8l8 8M16 8l-8 8" stroke="white" stroke-width="2.2" stroke-linecap="round"/></svg>',
-      info:    '<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#3D2D8E"/><path d="M12 8v4M12 16h.01" stroke="white" stroke-width="2.2" stroke-linecap="round"/></svg>'
-    };
-
-    toast.innerHTML =
-      '<div class="toast-icon">' + (icons[type] || icons.info) + '</div>' +
-      '<div class="toast-body"><div class="toast-title">' + title + '</div><div class="toast-msg">' + message + '</div></div>' +
-      '<button class="toast-close" aria-label="Close">&times;</button>';
-
-    container.appendChild(toast);
-    requestAnimationFrame(function() {
-      requestAnimationFrame(function() { toast.classList.add('toast--show'); });
-    });
-
-    function dismiss() {
-      toast.classList.remove('toast--show');
-      setTimeout(function() { if (toast.parentNode) toast.parentNode.removeChild(toast); }, 400);
-    }
-    toast.querySelector('.toast-close').addEventListener('click', dismiss);
-    if (duration > 0) setTimeout(dismiss, duration);
-  }
-
-  /* ============================================================
-     SCROLL TO FORM
-  ============================================================ */
-  function scrollToForm() {
-    document.getElementById('registration-form').scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
-
-  /* ============================================================
-     COUNTDOWN TIMER
-  ============================================================ */
-  function updateCountdown() {
-    var target = new Date('2026-04-25T09:30:00+05:30').getTime();
-    var diff = target - Date.now();
-    if (diff <= 0) {
-      ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(function(id) {
-        document.getElementById(id).textContent = '00';
-      });
-      return;
-    }
-    document.getElementById('cd-days').textContent  = String(Math.floor(diff / 86400000)).padStart(2, '0');
-    document.getElementById('cd-hours').textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
-    document.getElementById('cd-mins').textContent  = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-    document.getElementById('cd-secs').textContent  = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-  }
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-
-  /* ============================================================
-     FORM VALIDATION
-  ============================================================ */
-  function showErr(errId, inputEl) {
-    document.getElementById(errId).classList.add('visible');
-    inputEl.classList.add('error');
-  }
-  function clearErr(errId, inputEl) {
-    document.getElementById(errId).classList.remove('visible');
-    inputEl.classList.remove('error');
-  }
-
-  var fieldErrMap = { fullname: 'err-name', whatsapp: 'err-whatsapp', email: 'err-email' };
-  ['fullname', 'whatsapp', 'email'].forEach(function(id) {
-    document.getElementById(id).addEventListener('input', function() {
-      clearErr(fieldErrMap[id], document.getElementById(id));
-    });
-  });
-
-  function validateForm() {
-    var name  = document.getElementById('fullname');
-    var phone = document.getElementById('whatsapp');
-    var email = document.getElementById('email');
-    var valid = true;
-
-    if (!name.value.trim() || name.value.trim().length < 2) {
-      showErr('err-name', name); valid = false;
-    } else { clearErr('err-name', name); }
-
-    // Allow digits, spaces, dashes, parens, leading +; require 7–15 digits
-    var phoneDigits = phone.value.replace(/[\s\-\(\)\+]/g, '');
-    if (!/^\d{7,15}$/.test(phoneDigits)) {
-      showErr('err-whatsapp', phone); valid = false;
-    } else { clearErr('err-whatsapp', phone); }
-
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
-      showErr('err-email', email); valid = false;
-    } else { clearErr('err-email', email); }
-
-    return valid;
-  }
-
-  /* ============================================================
-     SINGLE FORM SUBMIT HANDLER
-     Google Apps Script requires mode:'no-cors' from the browser.
-     An opaque (no-cors) response cannot be read, but if fetch()
-     doesn't throw, the network request was dispatched successfully.
-  ============================================================ */
-  var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwhZ27Cwv0RGcIJhceE-Yz-kgyy1EaJtGoxxG4gNWWuieAy7b49rJS5JaYLSw0QWeDp/exec';
-
-  document.getElementById('webinar-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    if (!validateForm()) return;
-
-    var btn = this.querySelector('.form-submit');
-    var originalHTML = btn.innerHTML;
-    btn.disabled = true;
-    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="animation:spin 0.9s linear infinite"><circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.3)" stroke-width="2.5"/><path d="M12 2a10 10 0 0110 10" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>&nbsp; Registering...';
-
-    if (!document.getElementById('spin-kf')) {
-      var s = document.createElement('style');
-      s.id = 'spin-kf';
-      s.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
-      document.head.appendChild(s);
+    /* ---------- Scroll to form ---------- */
+    function scrollToForm() {
+      document.getElementById('registration-form').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    var formData = new FormData();
-    formData.append('fullname', document.getElementById('fullname').value.trim());
-    formData.append('whatsapp', document.getElementById('whatsapp').value.trim());
-    formData.append('email',    document.getElementById('email').value.trim());
-
-    fetch(APPS_SCRIPT_URL, {
-      method: 'POST',
-      mode:   'no-cors',   // required for Google Apps Script web apps
-      body:    formData
-    })
-    .then(function() {
-      // no-cors fetch resolves with opaque response — if we reach here, it sent OK
-      showToast('success', "You're registered! ", "Check your WhatsApp & email for the Zoom link. See you on April 25th!", 0);
-      setTimeout(function() { window.location.href = 'thank-you.html'; }, 2200);
-    })
-    .catch(function(err) {
-      console.error('Submission error:', err);
-      btn.disabled = false;
-      btn.innerHTML = originalHTML;
-      showToast('error', 'Submission Failed', 'Please check your connection and try again. If the issue persists, reach out to us directly.');
-    });
-  });
-
-  /* ============================================================
-     SCROLL REVEAL
-  ============================================================ */
-  var fadeEls = document.querySelectorAll('.fade-up');
-  var revealObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry, i) {
-      if (entry.isIntersecting) {
-        setTimeout(function() { entry.target.classList.add('visible'); }, 80 * i);
-        revealObserver.unobserve(entry.target);
+    /* ---------- Countdown timer ---------- */
+    function updateCountdown() {
+      const target = new Date('2026-04-25T09:30:00+05:30').getTime();
+      const now = Date.now();
+      const diff = target - now;
+      if (diff <= 0) {
+        ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => document.getElementById(id).textContent = '00');
+        return;
       }
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
+      document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+      document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
+      document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    /* ---------- Form validation ---------- */
+    const form = document.getElementById('webinar-form');
+    function showErr(id, inputEl) { document.getElementById(id).classList.add('visible'); inputEl.classList.add('error'); }
+    function clearErr(id, inputEl) { document.getElementById(id).classList.remove('visible'); inputEl.classList.remove('error'); }
+
+    ['fullname','whatsapp','email'].forEach(id => {
+      const el = document.getElementById(id);
+      const errMap = { fullname: 'err-name', whatsapp: 'err-whatsapp', email: 'err-email' };
+      el.addEventListener('input', () => clearErr(errMap[id], el));
     });
-  }, { threshold: 0.12 });
-  fadeEls.forEach(function(el) { revealObserver.observe(el); });
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      let valid = true;
+      const name  = document.getElementById('fullname');
+      const phone = document.getElementById('whatsapp');
+      const email = document.getElementById('email');
+
+      if (!name.value.trim() || name.value.trim().length < 2) { showErr('err-name', name); valid = false; } else { clearErr('err-name', name); }
+      const phoneClean = phone.value.replace(/[\s\-\(\)]/g,'');
+      if (!/^\+?\d{7,15}$/.test(phoneClean)) { showErr('err-whatsapp', phone); valid = false; } else { clearErr('err-whatsapp', phone); }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) { showErr('err-email', email); valid = false; } else { clearErr('err-email', email); }
+
+      if (!valid) return;
+      const btn = form.querySelector('.form-submit');
+      btn.disabled = true;
+      btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="2"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Registering...`;
+      setTimeout(() => { window.location.href = 'thank-you.html'; }, 800);
+    });
+
+    /* ---------- Scroll reveal ---------- */
+    const fadeEls = document.querySelectorAll('.fade-up');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), 80 * i);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    fadeEls.forEach(el => observer.observe(el));
   </script>
 
+  <script>
+  document.getElementById("webinar-form").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const data = {
+      fullname: document.getElementById("fullname").value,
+      whatsapp: document.getElementById("whatsapp").value,
+      email: document.getElementById("email").value
+    };
+
+    try {
+      const res = await fetch("https://script.google.com/macros/s/AKfycbzUzXHNwvQqe9CQOGsRE89shFO8Q9VyC6sQ_WpqadUI0YyMyCtvfHWpy-lO47yzWh0/exec", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+
+      const result = await res.json();
+
+      if (result.status === "success") {
+        alert("Form submitted successfully!");
+        document.getElementById("webinar-form").reset();
+      }
+    } catch (err) {
+      alert("Something went wrong!");
+      console.error(err);
+    }
+  });
+  </script>
 </body>
 </html>

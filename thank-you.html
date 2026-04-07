@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>You're Registered! — Embarc Admissions Webinar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary-indigo:  #3D2D8E;
+      --primary-pink:    #E8609A;
+      --primary-magenta: #C8337A;
+      --primary-deep:    #8B1A5E;
+      --sec-yellow:      #FFE3A5;
+      --sec-lavender:    #F7C1D8;
+      --sec-purple:      #9C84BD;
+      --sec-dark:        #16003F;
+      --sec-ice:         #D8E1E7;
+      --white:           #FFFFFF;
+      --off-white:       #FAF9FD;
+      --text-dark:       #16003F;
+      --text-mid:        #4A3F6B;
+      --text-light:      #7B6FA0;
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 28px;
+      --radius-xl: 48px;
+      --shadow-card: 0 8px 40px rgba(61,45,142,0.10);
+      --nav-h: 72px;
+      --logo-d: 108px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--off-white);
+      color: var(--text-dark);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1,h2,h3,h4 { line-height: 1.2; font-weight: 700; }
+    p { line-height: 1.7; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+    .gradient-text {
+      background: linear-gradient(135deg, var(--primary-indigo) 0%, var(--primary-magenta) 60%, var(--primary-pink) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── NAV (identical to landing page) ── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(156,132,189,0.18);
+      height: var(--nav-h);
+    }
+    .nav::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--sec-lavender) 0%, var(--sec-purple) 30%, var(--primary-magenta) 60%, var(--primary-indigo) 100%);
+      opacity: 0.35;
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 1180px; margin: 0 auto; padding: 0 24px;
+      height: var(--nav-h);
+      overflow: visible;
+    }
+    .nav-logo-wrap {
+      display: flex; align-items: center;
+      position: relative; flex-shrink: 0;
+      margin-top: calc(var(--logo-d) / 2);
+      z-index: 101;
+    }
+    .nav-logo-circle {
+      width: var(--logo-d); height: var(--logo-d);
+      background: white; border-radius: 50%;
+      border: 2px solid rgba(156,132,189,0.25);
+      box-shadow: 0 4px 24px rgba(61,45,142,0.14);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .nav-logo-circle img { width: 88px; height: 88px; object-fit: contain; }
+
+    /* ── HERO ── */
+    .hero {
+      padding-top: calc(var(--nav-h) + var(--logo-d) / 2 + 48px);
+      min-height: 72vh;
+      background: linear-gradient(160deg, #FAF9FD 0%, #F3EEF9 40%, #FCF0F5 70%, #FAF9FD 100%);
+      position: relative; overflow: hidden;
+      display: flex; align-items: center;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; width: 640px; height: 640px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(61,45,142,0.06) 0%, transparent 70%);
+      top: -120px; right: -120px; pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; width: 480px; height: 480px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,51,122,0.06) 0%, transparent 70%);
+      bottom: -80px; left: -80px; pointer-events: none;
+    }
+    .hero-inner {
+      width: 100%;
+      padding: 48px 0 72px;
+      text-align: center;
+      position: relative; z-index: 1;
+    }
+
+    /* Confetti burst badge */
+    .success-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, rgba(61,45,142,0.08), rgba(200,51,122,0.08));
+      border: 1.5px solid rgba(200,51,122,0.2);
+      border-radius: var(--radius-xl);
+      padding: 10px 22px;
+      font-size: 13px; font-weight: 700;
+      color: var(--primary-magenta);
+      margin-bottom: 28px;
+      animation: badge-pop 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    @keyframes badge-pop {
+      from { opacity: 0; transform: scale(0.7); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 4.5vw, 54px);
+      font-weight: 800;
+      color: var(--text-dark);
+      line-height: 1.15;
+      margin-bottom: 20px;
+      animation: fade-up 0.7s 0.15s ease both;
+    }
+    .hero-sub {
+      font-size: 18px; font-weight: 400; color: var(--text-mid);
+      margin-bottom: 0; max-width: 560px; margin: 0 auto;
+      animation: fade-up 0.7s 0.25s ease both;
+    }
+    .hero-sub strong { color: var(--primary-indigo); font-weight: 700; }
+
+    /* Webinar detail pills */
+    .hero-details {
+      display: flex; align-items: center; justify-content: center;
+      flex-wrap: wrap; gap: 12px;
+      margin-top: 32px;
+      animation: fade-up 0.7s 0.35s ease both;
+    }
+    .detail-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: white;
+      border: 1px solid rgba(61,45,142,0.12);
+      border-radius: var(--radius-xl);
+      padding: 9px 18px;
+      font-size: 13px; font-weight: 600;
+      color: var(--text-dark);
+      box-shadow: 0 2px 12px rgba(61,45,142,0.07);
+    }
+    .detail-pill svg { flex-shrink: 0; }
+
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── NEXT STEPS ── */
+    .next-steps {
+      padding: 88px 0;
+      background: var(--off-white);
+    }
+    .section-label {
+      display: inline-block;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--primary-magenta);
+      margin-bottom: 14px;
+    }
+    .section-headline {
+      font-size: clamp(26px, 3.5vw, 40px);
+      font-weight: 700; color: var(--text-dark);
+      margin-bottom: 52px; text-align: center;
+    }
+
+    .steps-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .step-item {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 0 28px;
+      position: relative;
+    }
+    .step-item:not(:last-child) .step-spine::after {
+      content: '';
+      position: absolute;
+      left: 31px; top: 64px; bottom: -8px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--primary-indigo) 0%, rgba(200,51,122,0.15) 100%);
+    }
+    .step-spine {
+      display: flex; flex-direction: column; align-items: center;
+      padding-top: 2px; position: relative;
+    }
+    .step-dot {
+      width: 52px; height: 52px; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--primary-indigo), var(--primary-magenta));
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 19px; font-weight: 800; color: white;
+      z-index: 1;
+      box-shadow: 0 6px 20px rgba(61,45,142,0.22);
+    }
+    .step-body {
+      background: white;
+      border: 1px solid rgba(61,45,142,0.08);
+      border-radius: var(--radius-md);
+      padding: 24px 28px;
+      margin-bottom: 20px;
+      transition: box-shadow 0.25s, transform 0.25s;
+      position: relative; overflow: hidden;
+    }
+    .step-body::before {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--primary-indigo), var(--primary-magenta));
+    }
+    .step-body:hover { box-shadow: var(--shadow-card); transform: translateX(4px); }
+    .step-title {
+      font-size: 17px; font-weight: 700; color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+    .step-desc {
+      font-size: 14px; color: var(--text-mid); line-height: 1.7;
+      margin-bottom: 0;
+    }
+    .step-desc + .step-cta { margin-top: 18px; }
+
+    .step-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, var(--primary-indigo), var(--primary-magenta));
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px; font-weight: 700;
+      padding: 11px 24px; border-radius: var(--radius-xl);
+      border: none; cursor: pointer; text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .step-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(200,51,122,0.38); }
+
+    .step-cta.outline {
+      background: transparent;
+      border: 1.5px solid var(--primary-indigo);
+      color: var(--primary-indigo);
+    }
+    .step-cta.outline:hover { background: rgba(61,45,142,0.06); box-shadow: none; transform: translateY(-1px); }
+
+    /* Email highlight chip */
+    .email-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(61,45,142,0.07);
+      border: 1px solid rgba(61,45,142,0.14);
+      border-radius: 6px;
+      padding: 3px 10px;
+      font-size: 13px; font-weight: 600; color: var(--primary-indigo);
+      font-style: normal;
+    }
+
+    /* ── WHILE YOU WAIT ── */
+    .while-wait {
+      background: linear-gradient(160deg, #FAF9FD 0%, #F0EBF8 100%);
+      padding: 88px 0;
+    }
+    .wait-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .wait-card {
+      background: white;
+      border: 1px solid rgba(61,45,142,0.08);
+      border-radius: var(--radius-md);
+      padding: 32px 28px;
+      position: relative; overflow: hidden;
+      transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
+    }
+    .wait-card::after {
+      content: ''; position: absolute;
+      bottom: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--primary-indigo), var(--primary-magenta));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .wait-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); border-color: rgba(61,45,142,0.16); }
+    .wait-card:hover::after { transform: scaleX(1); }
+
+    .wait-icon {
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, rgba(61,45,142,0.1), rgba(200,51,122,0.1));
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 18px;
+    }
+    .wait-card h3 { font-size: 16px; font-weight: 700; color: var(--text-dark); margin-bottom: 10px; }
+    .wait-card p  { font-size: 14px; color: var(--text-mid); line-height: 1.65; margin-bottom: 0; }
+    .wait-card p + .step-cta { margin-top: 18px; }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: linear-gradient(135deg, var(--primary-indigo) 0%, var(--primary-magenta) 60%, var(--primary-pink) 100%);
+      padding: 48px 0;
+    }
+    .stats-inner { display: flex; justify-content: center; gap: 0; flex-wrap: wrap; }
+    .stat-item { text-align: center; padding: 16px 56px; position: relative; flex: 1; min-width: 200px; }
+    .stat-item:not(:last-child)::after { content: ''; position: absolute; right: 0; top: 20%; bottom: 20%; width: 1px; background: rgba(255,255,255,0.25); }
+    .stat-num { display: block; font-size: 40px; font-weight: 800; color: white; line-height: 1; margin-bottom: 8px; }
+    .stat-label { display: block; font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.85); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--sec-dark); padding: 32px 0; text-align: center; }
+    footer p { font-size: 13px; color: rgba(255,255,255,0.5); }
+    footer a { color: rgba(255,255,255,0.75); font-weight: 600; transition: color 0.2s; }
+    footer a:hover { color: var(--primary-pink); }
+
+    /* ── SCROLL FADE ── */
+    .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      :root { --nav-h: 64px; --logo-d: 90px; }
+      .wait-grid { grid-template-columns: 1fr; }
+      .step-item { grid-template-columns: 48px 1fr; gap: 0 16px; }
+      .step-item:not(:last-child) .step-spine::after { left: 23px; }
+      .step-dot { width: 42px; height: 42px; font-size: 16px; }
+      .hero h1 { font-size: 26px; }
+      .stat-item { padding: 16px 24px; }
+      .stat-item::after { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo-wrap">
+        <div class="nav-logo-circle">
+          <img src="https://www.embarcadmissions.com/assets/logo.png" alt="Embarc Admissions" />
+        </div>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-inner">
+
+        <div class="success-badge">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" fill="rgba(200,51,122,0.15)"/>
+            <path d="M8 12l3 3 5-5" stroke="#C8337A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Registration Confirmed
+        </div>
+
+        <h1>You're Registered!<br><span class="gradient-text">See You at the Webinar</span></h1>
+
+        <p class="hero-sub" style="margin-top:16px;">
+          Your seat is confirmed for <strong>Saturday, 25 April</strong> at <strong>9:30 AM IST</strong>
+        </p>
+
+        <div class="hero-details">
+          <div class="detail-pill">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="3" stroke="#3D2D8E" stroke-width="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke="#3D2D8E" stroke-width="2" stroke-linecap="round"/></svg>
+            Saturday, April 25th
+          </div>
+          <div class="detail-pill">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="#3D2D8E" stroke-width="2"/><path d="M12 7v5l3 3" stroke="#3D2D8E" stroke-width="2" stroke-linecap="round"/></svg>
+            9:30 AM IST &nbsp;/&nbsp; 12:00 Noon SGT
+          </div>
+          <div class="detail-pill">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="3" stroke="#3D2D8E" stroke-width="2"/><path d="M8 21h8M12 17v4" stroke="#3D2D8E" stroke-width="2" stroke-linecap="round"/></svg>
+            Live on Zoom · Free
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHAT HAPPENS NEXT ── -->
+  <section class="next-steps">
+    <div class="container">
+      <div style="text-align:center;" class="fade-up">
+        <span class="section-label">What Happens Next</span>
+        <h2 class="section-headline">Three Steps to Get Ready</h2>
+      </div>
+
+      <div class="steps-col">
+
+        <!-- Step 1 -->
+        <div class="step-item fade-up">
+          <div class="step-spine">
+            <div class="step-dot">1</div>
+          </div>
+          <div class="step-body">
+            <div class="step-title">Check Your Inbox</div>
+            <p class="step-desc">
+              We've sent a confirmation email to&nbsp;<em class="email-chip">
+                <svg width="12" height="12" fill="none" viewBox="0 0 24 24"><path d="M4 4h16v16H4z" rx="2" stroke="#3D2D8E" stroke-width="2"/><path d="M4 8l8 5 8-5" stroke="#3D2D8E" stroke-width="2" stroke-linecap="round"/></svg>
+                your registered email
+              </em>&nbsp;with all the details and your personal Zoom link. Check your spam folder if you don't see it within a few minutes.
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-item fade-up">
+          <div class="step-spine">
+            <div class="step-dot">2</div>
+          </div>
+          <div class="step-body">
+            <div class="step-title">Join Our WhatsApp Community</div>
+            <p class="step-desc">Get webinar reminders, exclusive prep materials, and connect with other aspiring Ivy League students.</p>
+            <a href="#" class="step-cta" target="_blank" rel="noopener">
+              Join WhatsApp Group
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-item fade-up">
+          <div class="step-spine">
+            <div class="step-dot">3</div>
+          </div>
+          <div class="step-body">
+            <div class="step-title">Mark Your Calendar</div>
+            <p class="step-desc">Don't miss it! Add this event to your calendar so you get a reminder when it's time to join.</p>
+            <a
+              href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Embarc+Admissions+Webinar&dates=20260425T040000Z/20260425T051500Z&details=What+Does+It+Actually+Take+to+Get+Into+an+Ivy+League+College?+Live+on+Zoom.&location=Zoom+(link+sent+via+email)"
+              class="step-cta outline"
+              target="_blank" rel="noopener"
+            >
+              <svg width="15" height="15" fill="none" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="3" stroke="currentColor" stroke-width="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              Add to Calendar
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHILE YOU WAIT ── -->
+  <!-- <section class="while-wait">
+    <div class="container">
+      <div style="text-align:center;" class="fade-up">
+        <span class="section-label">While You Wait</span>
+        <h2 class="section-headline">Make the Most of the Time Before April 25th</h2>
+      </div>
+
+      <div class="wait-grid">
+
+        <div class="wait-card fade-up">
+          <div class="wait-icon">
+            <svg width="26" height="26" fill="none" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="var(--primary-indigo)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Prepare Your Questions</h3>
+          <p>Think about what you'd like to ask our expert speakers during the live Q&amp;A. The more specific your questions, the more personalized insights you'll get.</p>
+        </div>
+
+        <div class="wait-card fade-up">
+          <div class="wait-icon">
+            <svg width="26" height="26" fill="none" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-8 10 8M5 19v-9M19 19v-9M8 19v-5h8v5" stroke="var(--primary-indigo)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Explore Embarc's Services</h3>
+          <p>Curious about how we help students get into Ivy League and Oxbridge universities? Learn more about our unique approach.</p>
+          <a href="https://www.embarcadmissions.com" class="step-cta" target="_blank" rel="noopener">
+            Discover Our Services
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section> -->
+
+  <!-- ── STATS BAR ── -->
+  <div class="stats-bar">
+    <div class="container">
+      <div class="stats-inner">
+        <div class="stat-item">
+          <span class="stat-num">500+</span>
+          <span class="stat-label">Students Admitted to Top 50 Universities</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">15+</span>
+          <span class="stat-label">Years of Ivy League &amp; Oxbridge Expertise</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">98%</span>
+          <span class="stat-label">Success Rate for Students We Work With</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p style="margin-bottom:8px">&copy; 2026 Embarc Admissions. All rights reserved.</p>
+      <p>Managed by <a href="https://blackcoffee.media" target="_blank" rel="noopener">BlackCoffee Media</a></p>
+    </div>
+  </footer>
+
+  <script>
+    const fadeEls = document.querySelectorAll('.fade-up');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), 80 * i);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    fadeEls.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
