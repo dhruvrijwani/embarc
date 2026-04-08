@@ -678,33 +678,49 @@
     /* ============================================
        UNIVERSITY LOGO SCROLLER
     ============================================ */
+/* ============================================
+        UNIVERSITY LOGO SCROLLER — LIGHT THEME
+    ============================================ */
     .logo-scroller-section {
-      background: linear-gradient(135deg, var(--primary-indigo) 0%, #2A0060 50%, var(--primary-deep) 100%);
-      padding: 64px 0;
+      /* Light brand gradient using your off-white and secondary lavender */
+      background: linear-gradient(135deg, var(--off-white) 0%, var(--sec-lavender) 100%);
+      padding: 80px 0;
       overflow: hidden;
       position: relative;
+      border-top: 1px solid rgba(61,45,142,0.08);
+      border-bottom: 1px solid rgba(61,45,142,0.08);
     }
+
     .logo-scroller-section::before {
       content: '';
       position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 30% 50%, rgba(200,51,122,0.15) 0%, transparent 60%),
-                  radial-gradient(ellipse at 70% 50%, rgba(61,45,142,0.2) 0%, transparent 60%);
+      /* Subtle brand-colored glows */
+      background: radial-gradient(ellipse at 30% 50%, rgba(200,51,122,0.06) 0%, transparent 60%),
+                  radial-gradient(ellipse at 70% 50%, rgba(61,45,142,0.06) 0%, transparent 60%);
       pointer-events: none;
     }
+
     .logo-scroller-header {
       text-align: center;
       margin-bottom: 44px;
       position: relative; z-index: 1;
     }
-    .logo-scroller-header .section-label { color: var(--sec-lavender); }
+
+    /* Label adjusted for light background */
+    .logo-scroller-header .section-label { 
+      color: var(--primary-magenta); 
+    }
+
     .logo-scroller-header h2 {
       font-size: clamp(22px, 3vw, 34px);
       font-weight: 700;
-      color: white;
+      color: var(--text-dark); /* Changed from white to your brand dark text */
       line-height: 1.25;
     }
+
     .logo-scroller-header h2 span {
-      background: linear-gradient(135deg, var(--sec-yellow) 0%, var(--sec-lavender) 100%);
+      /* Adjusted gradient for legibility on light background */
+      background: linear-gradient(135deg, var(--primary-indigo) 0%, var(--primary-magenta) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -717,13 +733,15 @@
       position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2;
       pointer-events: none;
     }
+
+    /* Edge fades adjusted to match new light background */
     .scroller-track-wrap::before {
       left: 0;
-      background: linear-gradient(90deg, #2A0060 0%, transparent 100%);
+      background: linear-gradient(90deg, var(--off-white) 0%, transparent 100%);
     }
     .scroller-track-wrap::after {
       right: 0;
-      background: linear-gradient(270deg, #2A0060 0%, transparent 100%);
+      background: linear-gradient(270deg, var(--off-white) 0%, transparent 100%);
     }
 
     .scroller-track {
@@ -744,38 +762,44 @@
       flex-direction: column;
       align-items: center;
       gap: 10px;
-      padding: 20px 32px;
-      margin: 0 8px;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.12);
+      padding: 24px 32px;
+      margin: 0 12px;
+      /* Solid white cards look much cleaner on light gradients */
+      background: var(--white);
+      border: 1px solid rgba(61,45,142,0.1);
       border-radius: var(--radius-md);
-      min-width: 160px;
+      min-width: 170px;
       flex-shrink: 0;
-      transition: background 0.25s, border-color 0.25s, transform 0.25s;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(61,45,142,0.06);
       cursor: default;
     }
+
     .logo-card:hover {
-      background: rgba(255,255,255,0.14);
-      border-color: rgba(255,255,255,0.28);
-      transform: translateY(-3px);
+      background: var(--white);
+      border-color: var(--primary-magenta);
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(61,45,142,0.12);
     }
+
     .logo-card img {
-      height: 70px;
+      height: 60px; /* Slightly reduced to feel more elegant */
       width: auto;
       object-fit: contain;
-      transition: opacity 0.25s;
+      /* Removed opacity reduction so logos are clear by default */
     }
-    .logo-card:hover img { opacity: 1; }
+
     .logo-card-name {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
-      color: rgba(255,255,255,0.9);
+      color: var(--text-dark); /* Dark text for clarity */
       text-align: center;
       line-height: 1.3;
     }
+
     .logo-card-loc {
       font-size: 10px;
-      color: rgba(255,255,255,0.5);
+      color: var(--text-light); /* Subtler gray for the location */
       text-align: center;
     }
 
